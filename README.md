@@ -58,12 +58,12 @@ contract Calculator {
         require(msg.sender == owner, "You are not the owner of this account");
         total = divamt1 / divamt2;
     }
-}
+'''
 
-## Author
+ ## Author
 
 Thomas K Shiju - (mailto:thomaskshiju000@gmail.com)
 
-## License
+ ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

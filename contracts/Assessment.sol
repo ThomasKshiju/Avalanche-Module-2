@@ -5,56 +5,32 @@ pragma solidity ^0.8.9;
 
 contract Assessment {
     address payable public owner;
-    uint256 public balance;
-
-    event Deposit(uint256 amount);
-    event Withdraw(uint256 amount);
+    uint256 public total;
 
     constructor(uint initBalance) payable {
         owner = payable(msg.sender);
-        balance = initBalance;
+        total = initBalance;
     }
 
-    function getBalance() public view returns(uint256){
-        return balance;
+    function getTotal() public view returns(uint256){
+        return total;
+    }
+    
+    function add(uint256 addamt1, uint256 addamt2) public payable {
+        require(msg.sender == owner, "You are not the owner of this account");
+        total = addamt1 + addamt2;
     }
 
-    function deposit(uint256 _amount) public payable {
-        uint _previousBalance = balance;
 
-        // make sure this is the owner
+    function mul(uint256 mulamt1, uint256 mulamt2) public payable {
+       
         require(msg.sender == owner, "You are not the owner of this account");
 
-        // perform transaction
-        balance += _amount;
-
-        // assert transaction completed successfully
-        assert(balance == _previousBalance + _amount);
-
-        // emit the event
-        emit Deposit(_amount);
+        total= mulamt1 * mulamt2;
     }
 
-    // custom error
-    error InsufficientBalance(uint256 balance, uint256 withdrawAmount);
-
-    function withdraw(uint256 _withdrawAmount) public {
+    function div(uint256 divamt1, uint256 divamt2) public {
         require(msg.sender == owner, "You are not the owner of this account");
-        uint _previousBalance = balance;
-        if (balance < _withdrawAmount) {
-            revert InsufficientBalance({
-                balance: balance,
-                withdrawAmount: _withdrawAmount
-            });
-        }
-
-        // withdraw the given amount
-        balance -= _withdrawAmount;
-
-        // assert the balance is correct
-        assert(balance == (_previousBalance - _withdrawAmount));
-
-        // emit the event
-        emit Withdraw(_withdrawAmount);
+        total = divamt1 / divamt2;
     }
 }

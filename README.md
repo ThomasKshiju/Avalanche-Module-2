@@ -58,7 +58,7 @@ contract Calculator {
         require(msg.sender == owner, "You are not the owner of this account");
         total = divamt1 / divamt2;
     }
-'''
+```
 
  ## Author
 
